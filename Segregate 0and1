@@ -1,0 +1,25 @@
+'''
+Given an array arr consisting of only 0's and 1's in random order. Modify the array in-place to segregate 0s onto the left side and 1s onto the right side of the array.
+'''
+
+#Solution Code
+
+
+class Solution:
+    def segregate0and1(self, arr):
+        # Initialize a pointer for the next position to place a 0
+        left = 0
+        
+        # Traverse through the array
+        for i in range(len(arr)):
+            if arr[i] == 0:
+                # Swap arr[i] with arr[left], then move left pointer forward
+                arr[i], arr[left] = arr[left], arr[i]
+                left += 1
+
+# Example usage:
+if __name__ == "__main__":
+    arr = [0, 0, 0, 1, 0]
+    sol = Solution()
+    sol.segregate0and1(arr)
+    
