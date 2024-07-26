@@ -1,0 +1,23 @@
+'''
+Given a string str and an integer k, return true if the string can be changed into a pangram after at most k operations, else return false.
+
+A single operation consists of swapping an existing alphabetic character with any other lowercase alphabetic character.
+'''
+
+
+#Soluton Code
+
+
+class Solution:
+    def kPangram(self,string, k):
+        arr = [0] * 26
+        count = 0
+        op = 0
+        for char in string:
+            if char != ' ':
+                arr[ord(char) - ord('a')] += 1
+                count += 1
+        for i in range(26):
+            if arr[i] == 0:
+                op += 1
+        return (op <= k) and (count >= 26)
