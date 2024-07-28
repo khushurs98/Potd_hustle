@@ -1,0 +1,16 @@
+'''
+Given a string str without spaces, the task is to remove all duplicate characters from it, keeping only the first occurrence.
+'''
+
+
+#Solution Code
+
+
+class Solution:
+	def removeDups(self, str):
+		# code here edutechbarsha
+		ans = ""
+        for char in str:
+            if char not in ans:
+                ans += char
+        return ans
