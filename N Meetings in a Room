@@ -1,0 +1,17 @@
+'''
+You are given timings of n meetings in the form of (start[i], end[i]) where start[i] is the start time of meeting i and end[i] is the finish time of meeting i. Return the maximum number of meetings that can be accommodated in a single meeting room, when only one meeting can be held in the meeting room at a particular time. 
+'''
+
+#solution Code
+
+class Solution:
+    def maximumMeetings(self,n,start,end):
+        meetings = list(zip(start,end))
+        meetings.sort(key=lambda x: x[1])
+        last_end_time = -1
+        count = 0
+        for meeting in meetings:
+            if meeting[0] > last_end_time:
+                count += 1
+                last_end_time = meeting[1]
+        return count        
