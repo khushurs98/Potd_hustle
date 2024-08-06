@@ -1,0 +1,37 @@
+'''
+You are given a string str in the form of an IPv4 Address. Your task is to validate an IPv4 Address, if it is valid return true otherwise return false.
+
+IPv4 addresses are canonically represented in dot-decimal notation, which consists of four decimal numbers, each ranging from 0 to 255, separated by dots, e.g., 172.16.254.1
+
+A valid IPv4 Address is of the form x1.x2.x3.x4 where 0 <= (x1, x2, x3, x4) <= 255. Thus, we can write the generalized form of an IPv4 address as (0-255).(0-255).(0-255).(0-255)
+'''
+
+#Solution Code
+
+class Solution:
+    def isValid(self, str):
+        n = len(str)
+        segments = 0
+        num = 0
+        length = 0
+
+        for i in range(n):
+            if str[i] == '.':
+                if length == 0 or length > 3 or num > 255:
+                    return False
+                segments += 1
+                num = 0
+                length = 0
+            elif str[i].isdigit():
+                if length == 0 and str[i] == '0' and (i + 1 < n and str[i + 1] != '.'):
+                    return False
+                num = num * 10 + int(str[i])
+                length += 1
+            else:
+                return False
+
+        if length == 0 or length > 3 or num > 255:
+            return False
+        segments += 1
+
+        return segments == 4
