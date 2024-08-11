@@ -1,0 +1,27 @@
+'''
+Given a set of n jobs where each jobi has a deadline and profit associated with it.
+
+Each job takes 1 unit of time to complete and only one job can be scheduled at a time. We earn the profit associated with a job if and only if the job is completed by its deadline.
+
+Find the number of jobs done and the maximum profit.
+'''
+
+#Solution Code
+
+class Solution:
+    def JobScheduling(self, Jobs, n):
+        Jobs.sort(key=lambda x: x.profit, reverse=True)
+        maxDeadline = max(job.deadline for job in Jobs)
+        slot = [-1] * (maxDeadline + 1)
+
+        jobCount = 0
+        totalProfit = 0
+
+        for job in Jobs:
+            for j in range(job.deadline, 0, -1):
+                if slot[j] == -1:
+                    slot[j] = job.id
+                    jobCount += 1
+                    totalProfit += job.profit
+                    break
+        return [jobCount, totalProfit]
