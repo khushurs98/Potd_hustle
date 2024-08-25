@@ -1,0 +1,47 @@
+'''
+Given two positive integer arrays arr and brr, find the number of pairs such that xy > yx (raised to power of) where x is an element from arr and y is an element from brr.
+'''
+
+#Solution Code
+
+class Solution:
+    def countPairs(self, arr, brr):
+        N = len(brr)
+        NoOfY = [0] * 5
+        
+        for y in brr:
+            if y < 5:
+                NoOfY[y] += 1
+        
+        brr.sort()
+        total_pairs = 0
+        
+        for x in arr:
+            if x == 0:
+                continue
+            if x == 1:
+                total_pairs += NoOfY[0]
+                continue
+            
+            idx = self.upper_bound(brr, x)
+            count = N - idx
+            count += (NoOfY[0] + NoOfY[1])
+            
+            if x == 2:
+                count -= (NoOfY[3] + NoOfY[4])
+            if x == 3:
+                count += NoOfY[2]
+            
+            total_pairs += count
+        
+        return total_pairs
+    
+    def upper_bound(self, arr, x):
+        lo, hi = 0, len(arr)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if arr[mid] <= x:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
