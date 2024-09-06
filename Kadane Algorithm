@@ -1,0 +1,17 @@
+'''
+Given an integer array arr[]. Find the contiguous sub-array(containing at least one number) that has the maximum sum and return its sum.
+'''
+
+#Solution Code
+
+class Solution:
+    def maxSubArraySum(self, arr):
+        maxh = 0
+        maxf = float('-inf')
+
+        for num in arr:
+            maxh = max(num, maxh + num)
+            maxf = max(maxf, maxh)
+        
+        return maxf
+
