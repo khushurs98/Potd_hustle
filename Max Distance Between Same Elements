@@ -1,0 +1,17 @@
+'''
+Given an array arr[] with repeated elements, the task is to find the maximum distance between two occurrences of an element.
+'''
+
+#Solution Code
+
+class Solution:
+    def maxDistance(self, arr):
+        mp = {}
+        max_dist = 0
+        for i in range(len(arr)):
+            if arr[i] not in mp:
+                mp[arr[i]] = i
+            else:
+                max_dist = max(max_dist, i - mp[arr[i]])
+
+        return max_dist
