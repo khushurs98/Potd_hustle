@@ -1,0 +1,19 @@
+'''
+Given an unsorted array of integers arr[], and a target tar, determine the number of subarrays whose elements sum up to the target value.
+'''
+
+#Solution Code
+
+class Solution:
+    def subArraySum(self, arr, target):
+        prefixSumMap = {0: 1}  
+        curr_sum = 0
+        count = 0
+        
+        for num in arr:
+            curr_sum += num
+            if (curr_sum - target) in prefixSumMap:
+                count += prefixSumMap[curr_sum - target]
+            prefixSumMap[curr_sum] = prefixSumMap.get(curr_sum, 0) + 1
+        
+        return count
