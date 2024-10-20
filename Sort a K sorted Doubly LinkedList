@@ -1,0 +1,50 @@
+'''
+Given a doubly linked list, each node is at most k-indices away from its target position. The problem is to sort the given doubly linked list. The distance can be assumed in either of the directions (left and right).
+'''
+
+#Solution Code
+
+class DLLNode:
+    def __init__(self,val) -> None:
+        self.data = val
+        self.prev = None
+        self.next = None
+
+
+import heapq
+
+class Solution:
+    def sortAKSortedDLL(self, head, k):
+        if not head:
+            return None
+
+        pq = []
+        newHead = None
+        last = None
+        counter = 0
+
+        for i in range(k + 1):
+            if not head:
+                break
+            heapq.heappush(pq, (head.data, counter, head))
+            head = head.next
+            counter += 1
+
+        while pq:
+            data, _, min_node = heapq.heappop(pq)
+            if not newHead:
+                newHead = min_node
+                newHead.prev = None
+                last = newHead
+            else:
+                last.next = min_node
+                min_node.prev = last
+                last = min_node
+
+            if head:
+                heapq.heappush(pq, (head.data, counter, head))
+                head = head.next
+                counter += 1
+
+        last.next = None
+        return newHead
