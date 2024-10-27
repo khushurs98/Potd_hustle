@@ -1,0 +1,29 @@
+'''
+Given an array arr of integers. Find whether three numbers are such that the sum of two elements equals the third element.
+'''
+
+#Solution Code
+
+class Solution:
+    def findTriplet(self, arr):
+        n = len(arr)
+        if n < 3:
+            return False
+
+        arr.sort()  # Sort array
+
+        for i in range(n - 1, 1, -1):
+            target = arr[i]
+            left, right = 0, i - 1
+
+            while left < right:
+                sum_ = arr[left] + arr[right]
+
+                if sum_ == target:
+                    return True
+                elif sum_ < target:
+                    left += 1  
+                else:
+                    right -= 1 
+
+        return False  
