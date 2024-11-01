@@ -1,0 +1,18 @@
+'''
+Given an array arr[ ] of positive elements. Consider the array as a circular array, meaning the element after the last element is the first element of the array. The task is to find the maximum sum of the absolute differences between consecutive elements with shuffling of array elements allowed i.e. shuffle the array elements and make [a1..an] such order that  |a1 – a2| + |a2 – a3| + …… + |an-1 – an| + |an – a1| is maximized.
+'''
+
+#Solution Code
+
+class Solution:
+    def maxSum(self, arr):
+        arr.sort()
+
+        totalSum = 0
+        n = len(arr)
+
+        for i in range(n // 2):
+            totalSum += abs(arr[n - i - 1] - arr[i])
+            totalSum += abs(arr[i] - arr[n - i - 1])
+
+        return totalSum
