@@ -1,0 +1,15 @@
+'''
+Given an array arr[]. Push all the zeros of the given array to the right end of the array while maintaining the order of non-zero elements. Do the mentioned change in the array in place.
+'''
+
+#Solution Code
+
+class Solution:
+    def pushZerosToEnd(self, arr):
+        n = len(arr)
+        nonZeroIndex = 0
+
+        for i in range(n):
+            if arr[i] != 0:
+                arr[nonZeroIndex], arr[i] = arr[i], arr[nonZeroIndex]
+                nonZeroIndex += 1
