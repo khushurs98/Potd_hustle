@@ -1,0 +1,13 @@
+'''
+Given an unsorted array arr[]. Rotate the array to the left (counter-clockwise direction) by d steps, where d is a positive integer. Dothe mentioned change in the array in place.
+'''
+
+#Solution Code
+
+class Solution:
+    def rotateArr(self, arr, d):
+        n = len(arr)
+        d %= n
+        arr[0:d] = reversed(arr[0:d])
+        arr[d:n] = reversed(arr[d:n])
+        arr[0:n] = reversed(arr[0:n])
